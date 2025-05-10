@@ -1,13 +1,24 @@
-/* Complete override of button styles */
+/*
+ * Complete nuclear override of all button styles
+ * This is the most aggressive CSS approach possible
+ */
 .custom-button {
-  /* Remove all transitions that might cause issues */
+  /* Disable all transitions and animations */
   transition: none !important;
-  
+  animation: none !important;
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+
   /* Override Bootstrap completely */
   outline: none !important;
   box-shadow: none !important;
   border: none !important;
-  
+
+  /* Reset all possible states */
+  transform: none !important;
+  opacity: 1 !important;
+
   /* Custom styling */
   background-color: #ff0084 !important;
   color: white !important;
@@ -19,51 +30,141 @@
   text-align: center !important;
   text-decoration: none !important;
   position: relative !important;
-  z-index: 1 !important;
+  z-index: 100 !important; /* Higher z-index to ensure visibility */
+
+  /* Remove all Bootstrap button behaviors */
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  user-select: none !important;
 }
 
+/* Only change background on hover when not disabled */
 .custom-button:hover:not(:disabled) {
   background-color: #d6006c !important;
 }
 
+/* Clear disabled state styling */
 .custom-button:disabled {
   opacity: 0.7 !important;
   cursor: not-allowed !important;
   background-color: #ff0084 !important;
+  pointer-events: none !important;
 }
 
-/* Remove all Bootstrap button states */
+/* Remove absolutely all Bootstrap button states - comprehensive list */
 .custom-button:focus,
 .custom-button:active,
 .custom-button.active,
 .custom-button:focus-visible,
-.custom-button:focus-within {
+.custom-button:focus-within,
+.custom-button::-moz-focus-inner,
+.custom-button:-moz-focusring,
+.custom-button:hover,
+.custom-button.show,
+.custom-button.open,
+.custom-button.selected,
+.custom-button[aria-expanded="true"],
+.custom-button[aria-pressed="true"],
+.custom-button:target,
+.custom-button:visited {
   outline: none !important;
   box-shadow: none !important;
   transform: none !important;
   background-color: #ff0084 !important;
+  border-color: transparent !important;
+  text-decoration: none !important;
 }
 
-/* Override any Bootstrap active states */
-.btn-primary:not(:disabled):not(.disabled):active,
-.btn-primary:not(:disabled):not(.disabled).active,
-.show > .btn-primary.dropdown-toggle {
+/* Remove button press effects */
+.custom-button:active,
+.custom-button.active,
+.custom-button[aria-pressed="true"] {
+  transform: none !important;
+  top: 0 !important;
+  left: 0 !important;
+}
+
+/* Break free from Bootstrap's specificity with multiple selectors */
+.btn.custom-button,
+.btn-primary.custom-button,
+.btn.btn-primary.custom-button,
+button.custom-button,
+input.custom-button,
+.custom-button.btn,
+.custom-button.btn-primary,
+.download-btn-container .custom-button {
   background-color: #ff0084 !important;
-  border-color: #ff0084 !important;
+  border-color: transparent !important;
   box-shadow: none !important;
+}
+
+/* Override any Bootstrap active states with extremely specific selectors */
+.btn-primary:not(:disabled):not(.disabled):active.custom-button,
+.btn-primary:not(:disabled):not(.disabled).active.custom-button,
+.btn-primary.custom-button:not(:disabled):not(.disabled):active,
+.btn-primary.custom-button:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle.custom-button,
+.show > .btn-primary.custom-button.dropdown-toggle,
+.custom-button:active:not(:disabled):not(.disabled),
+.active.custom-button:not(:disabled):not(.disabled),
+html body .btn-primary.custom-button:active,
+html body .custom-button.active {
+  background-color: #ff0084 !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+  outline: none !important;
 }
 
 /* Ensure form doesn't have any weird behaviors */
 #download-form {
   position: relative;
-  z-index: 1;
+  z-index: 10;
+  pointer-events: auto !important;
 }
 
-/* Prevent any container from capturing clicks */
+/* Reset pointer events on card body */
 .card-body {
   pointer-events: none;
 }
 
+/* But allow pointer events on direct children */
 .card-body > * {
   pointer-events: auto;
+}
+
+/* Create a reset for all button styles */
+button {
+  touch-action: manipulation;
+}
+
+/* Special handling for the download button card */
+#music-tab .card:first-child .card-body {
+  position: relative;
+  z-index: 5;
+}
+
+/* Force the button container to behave correctly */
+.download-btn-container {
+  position: relative;
+  z-index: 5;
+  display: inline-block;
+}
+
+/* Disable any interference from Bootstrap's dropdown or modal systems */
+.dropdown-backdrop,
+.modal-backdrop {
+  display: none !important;
+}
+
+/* Completely override Bootstrap's focus styling */
+:focus {
+  outline: none !important;
+}
+
+/* Make sure the spinner icon is visible */
+.custom-button .fa-spinner {
+  color: white !important;
+  opacity: 1 !important;
 }

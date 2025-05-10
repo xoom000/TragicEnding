@@ -305,6 +305,10 @@
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Button isolation layer - load this before any other scripts -->
+  <script src="/static/js/button-isolation.js"></script>
+
   <!-- Global variables -->
   <script>
   window.selectedArtwork = null;
@@ -326,59 +330,117 @@
   <!-- Validation tests (development only) -->
   <script src="/static/js/tragic-validation-test.js"></script>
 
-  <!-- Diagnostic script for button debugging -->
+  <!-- Enhanced diagnostic script for button behavior -->
   <script>
-  // Diagnostic script
+  // Comprehensive diagnostic script
   document.addEventListener('DOMContentLoaded', function() {
     const button = document.getElementById('download-button');
+    console.log('Running enhanced button diagnostics...');
+
+    // Log Bootstrap version
+    console.log('Bootstrap version:', typeof bootstrap !== 'undefined' ? bootstrap.version : 'not loaded');
+
+    // Create isolated logging functions to avoid interference
+    function safeLog(message, data) {
+      try {
+        console.log(message, data);
+      } catch (e) {
+        console.log('Logging error:', e);
+      }
+    }
 
     if (button) {
-      // Log all events on the button
-      ['click', 'mousedown', 'mouseup', 'focus', 'blur', 'keydown'].forEach(eventType => {
-        button.addEventListener(eventType, function(e) {
-          console.log(`Button ${eventType} event:`, {
-            type: e.type,
-            target: e.target.id,
-            activeElement: document.activeElement.id || document.activeElement.tagName
-          });
-        }, true);
+      // More extensive event tracking
+      ['click', 'mousedown', 'mouseup', 'focus', 'blur', 'keydown',
+       'mouseover', 'mouseout', 'touchstart', 'touchend'].forEach(eventType => {
+        try {
+          // Use a clean function for each listener to avoid shared references
+          button.addEventListener(eventType, function buttonEventLogger(e) {
+            safeLog(`Button ${eventType} event:`, {
+              type: e.type,
+              target: e.target.id,
+              activeElement: document.activeElement.id || document.activeElement.tagName,
+              buttonClasses: button.className,
+              timestamp: new Date().getTime()
+            });
+          }, true);
+        } catch (e) {
+          console.error('Error adding listener:', e);
+        }
       });
+    }
 
-      // Log all clicks on the document
-      document.addEventListener('click', function(e) {
-        console.log('Document click:', {
-          target: e.target.tagName,
-          id: e.target.id,
-          classList: e.target.classList.toString(),
-          path: e.composedPath().map(el => el.tagName || 'DOCUMENT').join(' > ')
+    // Create a completely isolated click tracker
+    const originalAddEventListener = EventTarget.prototype.addEventListener;
+    let eventCounter = 0;
+
+    // Track event handlers being added
+    EventTarget.prototype._addEventListener = function(type, listener, options) {
+      if (type === 'click' || type === 'mousedown') {
+        eventCounter++;
+        safeLog(`Event listener #${eventCounter} added for ${type} on:`, {
+          element: this.tagName || this.toString(),
+          id: this.id,
+          className: this.className,
+          isDocument: this === document,
+          isBody: this === document.body
         });
+      }
+      return originalAddEventListener.apply(this, arguments);
+    };
+
+    // Log DOM state periodically
+    setInterval(() => {
+      const btn = document.getElementById('download-button');
+      if (btn) {
+        safeLog('Button state check:', {
+          className: btn.className,
+          disabled: btn.disabled,
+          hasAttribute_data_bs_toggle: btn.hasAttribute('data-bs-toggle'),
+          activeElement: document.activeElement.id || document.activeElement.tagName,
+          buttonComputed: window.getComputedStyle(btn)
+        });
+      }
+    }, 3000);
+  });
+  </script>
+
+  <!-- Prevent click bubbling with super-strong isolation -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Create a click shield around the entire music tab
+    const musicTab = document.getElementById('music-tab');
+    if (musicTab) {
+      // Shield to catch all clicks and prevent them from reaching document
+      musicTab.addEventListener('click', function(e) {
+        // Only allow download button to handle its own clicks
+        if (e.target.id === 'download-button' ||
+            (e.target.parentNode && e.target.parentNode.id === 'download-button')) {
+          // Let the button's own handler manage it
+          return;
+        }
+
+        // For any other click in this tab, prevent it from affecting buttons
+        console.log('Music tab click shield activated for:', e.target.tagName);
+
+        // Force all buttons to blur
+        document.querySelectorAll('button').forEach(btn => {
+          if (btn.id !== 'download-button') {
+            btn.blur();
+          }
+        });
+
+        // Ensure our download button is in a clean state
+        const downloadButton = document.getElementById('download-button');
+        if (downloadButton) {
+          downloadButton.classList.remove('active', 'focus', 'clicked', 'btn-active');
+        }
       }, true);
     }
   });
   </script>
 
-  <!-- Prevent click bubbling issues -->
-  <script>
-  // Prevent click bubbling issues
-  document.addEventListener('DOMContentLoaded', function() {
-    // Stop click events from bubbling up from forms
-    document.querySelectorAll('form').forEach(form => {
-      form.addEventListener('click', function(e) {
-        if (e.target.tagName === 'FORM' ||
-            e.target.classList.contains('card-body') ||
-            e.target.classList.contains('mb-3')) {
-          e.stopPropagation();
-        }
-      }, true);
-    });
-
-    // Global click handler to blur any focused buttons
-    document.addEventListener('click', function(e) {
-      if (!e.target.closest('button')) {
-        document.querySelectorAll('button:focus').forEach(btn => btn.blur());
-      }
-    });
-  });
-  </script>
+  <!-- Final button sanity check - runs last to ensure button is clean -->
+  <script src="/static/js/button-final-check.js"></script>
 </body>
 </html>
