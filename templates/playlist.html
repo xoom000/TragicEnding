@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🖤 {{ playlist_name }} - A Tragic Ending 🖤</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/tragic-validation.css">
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --primary-color: #ff0099;
+            --secondary-color: #333333;
+            --text-color: #f0f0f0;
+            --accent-color: #7d26cd;
+            --error-color: #ff3333;
+            --success-color: #00cc99;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 20px;
+            position: relative;
+        }
+        
+        .back-btn {
+            position: absolute;
+            left: 0;
+            top: 10px;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .back-btn:hover {
+            transform: translateX(-5px);
+            text-shadow: 0 0 10px rgba(255, 0, 153, 0.5);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px rgba(255, 0, 153, 0.5);
+            margin: 0;
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            border-left: 4px solid var(--accent-color);
+            padding-left: 10px;
+            margin-top: 30px;
+        }
+        
+        .skull-icon {
+            display: inline-block;
+            font-size: 1.5em;
+            margin: 0 10px;
+            color: var(--primary-color);
+        }
+        
+        .btn {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.3s;
+            font-family: 'Courier New', monospace;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        
+        .btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .alert {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .alert-error {
+            background-color: var(--error-color);
+            color: #fff;
+        }
+        
+        .alert-success {
+            background-color: var(--success-color);
+            color: #fff;
+        }
+        
+        .list-group {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .list-item {
+            background-color: var(--secondary-color);
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .list-item:hover {
+            background-color: #444;
+        }
+        
+        .action-btn {
+            background-color: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--accent-color);
+            padding: 5px 10px;
+            margin-left: 5px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .action-btn:hover {
+            background-color: var(--accent-color);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--accent-color);
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .playlist-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .playlist-meta {
+            display: flex;
+            align-items: center;
+        }
+        
+        .playlist-count {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            margin-left: 15px;
+        }
+        
+        .track-number {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            margin-right: 15px;
+        }
+        
+        .empty-playlist {
+            text-align: center;
+            padding: 40px;
+            background-color: var(--secondary-color);
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .gothic-border {
+            border: 2px solid var(--primary-color);
+            position: relative;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .gothic-border::before {
+            content: '♱';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background-color: var(--bg-color);
+            padding: 0 10px;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+        
+        .gothic-border::after {
+            content: '☠';
+            position: absolute;
+            bottom: -15px;
+            right: 20px;
+            background-color: var(--bg-color);
+            padding: 0 10px;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+    </style>
+  <!-- Gothic Theme CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=EB+Garamond&family=New+Rocker&family=Sedgwick+Ave+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/dark-melody-styling.css">
+</head>
+<body>
+  <!-- Decorative skulls -->
+  <div class="skull-decoration" style="top: 15%; left: 5%;">☠️</div>
+  <div class="skull-decoration" style="top: 35%; right: 8%; animation-delay: 2s;">☠️</div>
+  <div class="skull-decoration" style="bottom: 20%; left: 12%; animation-delay: 4s;">☠️</div>
+  <div class="skull-decoration" style="bottom: 40%; right: 15%; animation-delay: 6s;">☠️</div>
+    <div class="container">
+        <header>
+            <a href="/" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+            <h1>
+                <span class="skull-icon">☠</span>
+                A Tragic Ending
+                <span class="skull-icon">☠</span>
+            </h1>
+        </header>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <div class="gothic-border">
+            <div class="playlist-header">
+                <div class="playlist-meta">
+                    <h2><i class="fas fa-headphones"></i> {{ playlist_name }}</h2>
+                    <span class="playlist-count">{{ songs|length }}</span>
+                </div>
+                <a href="/delete_playlist/{{ playlist_file }}" class="action-btn" onclick="return confirm('Are you sure you want to delete this playlist?')">
+                    <i class="fas fa-trash"></i> Delete Playlist
+                </a>
+            </div>
+            
+            {% if songs %}
+                <ul class="list-group">
+                    {% for song in songs %}
+                        <li class="list-item">
+                            <div style="display: flex; align-items: center;">
+                                <span class="track-number">{{ loop.index }}</span>
+                                {{ song }}
+                            </div>
+                            <div>
+                                <a href="/play/{{ song }}" class="action-btn" target="_blank">
+                                    <i class="fas fa-play"></i> Play
+                                </a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <div class="empty-playlist">
+                    <i class="fas fa-ghost" style="font-size: 3rem; margin-bottom: 20px; color: var(--primary-color);"></i>
+                    <p>This playlist is empty. All songs may have been deleted.</p>
+                </div>
+            {% endif %}
+            
+            <a href="/" class="btn">
+                <i class="fas fa-home"></i> Back to Library
+            </a>
+        </div>
+        
+        <footer>
+            <p>🖤 A Tragic Ending | Crafted with despair for your listening pleasure 🖤</p>
+        </footer>
+    </div>
+  <!-- Gothic Theme JavaScript -->
+  <script src="/static/js/dark-melody-integration.js"></script>
+  <!-- Custom form validation -->
+  <script src="/static/js/tragic-validation.js"></script>
+</body>

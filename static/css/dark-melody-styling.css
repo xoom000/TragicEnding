@@ -1,0 +1,477 @@
+/* Emo Goth Teen Theme */
+:root {
+  --hot-pink: #ff0084;
+  --dark-pink: #d6006c;
+  --black: #000000;
+  --dark-gray: #222222;
+  --light-gray: #444444;
+  --white: #ffffff;
+  --purple: #660066;
+  --accent: #b700ff;
+}
+
+body { 
+  background-color: var(--black);
+  font-family: 'EB Garamond', serif;
+  color: var(--white);
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M30,10 L15,25 L30,40 L15,55 L30,70 L15,85 L30,100" stroke="%233c003c" fill="none" stroke-width="0.5" /></svg>'), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="0" y="30" font-family="Arial" font-size="10" fill="%23ff0084" opacity="0.1">&#x2620;</text></svg>');
+}
+
+.navbar { 
+  background: linear-gradient(45deg, var(--black), var(--dark-gray), var(--hot-pink));
+  border-bottom: 2px solid var(--hot-pink);
+  box-shadow: 0 4px 10px rgba(255, 0, 132, 0.3);
+}
+
+.navbar-brand { 
+  font-family: 'New Rocker', cursive;
+  font-weight: bold;
+  font-size: 1.8rem;
+  text-shadow: 0 0 5px var(--hot-pink);
+  letter-spacing: 1px;
+}
+
+.nav-link {
+  font-family: 'Creepster', cursive;
+  font-size: 1.3rem;
+  color: var(--white) !important;
+  transition: all 0.3s;
+  text-shadow: 0 0 3px var(--hot-pink);
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--hot-pink) !important;
+  transform: scale(1.05);
+  text-shadow: 0 0 8px var(--hot-pink);
+}
+
+.card {
+  background-color: var(--dark-gray);
+  border: 1px solid var(--hot-pink);
+  box-shadow: 0 0 15px rgba(255, 0, 132, 0.2);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  overflow: hidden; /* Ensure content doesn't break border radius */
+}
+
+.card-header { 
+  background: linear-gradient(90deg, var(--black), var(--dark-pink));
+  color: var(--white); 
+  font-family: 'Sedgwick Ave Display', cursive;
+  font-size: 1.4rem;
+  border-bottom: 1px solid var(--hot-pink);
+  padding: 0.7rem 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.card-header::before {
+  content: "☠️";
+  margin-right: 10px;
+}
+
+.btn-primary { 
+  background-color: var(--hot-pink); 
+  border-color: var(--dark-pink); 
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(255, 0, 132, 0.4);
+  transition: all 0.3s;
+}
+
+.btn-primary:hover { 
+  background-color: var(--dark-pink);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 0, 132, 0.6);
+}
+
+.btn-danger { 
+  background: linear-gradient(45deg, var(--black), var(--hot-pink)); 
+  border-color: var(--hot-pink);
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(255, 0, 132, 0.4);
+  transition: all 0.3s;
+}
+
+.btn-danger:hover { 
+  background: linear-gradient(45deg, var(--hot-pink), var(--dark-pink));
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 0, 132, 0.6);
+}
+
+.btn-success {
+  background: linear-gradient(45deg, #660066, #990099);
+  border-color: #990099;
+  transition: all 0.3s;
+}
+
+.btn-success:hover {
+  background: linear-gradient(45deg, #990099, #cc00cc);
+  transform: translateY(-2px);
+}
+
+.btn-outline-danger {
+  color: var(--hot-pink);
+  border-color: var(--hot-pink);
+}
+
+.btn-outline-danger:hover {
+  background-color: var(--hot-pink);
+  color: var(--white);
+}
+
+.btn-outline-light {
+  color: var(--white);
+  border-color: var(--hot-pink);
+}
+
+.btn-outline-light:hover {
+  background-color: var(--hot-pink);
+  color: var(--white);
+}
+
+.drop-zone {
+  border: 3px dashed var(--hot-pink);
+  border-radius: 10px;
+  padding: 25px;
+  text-align: center;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 0, 132, 0.05);
+  position: relative;
+}
+
+.drop-zone:hover, .drop-zone.dragover {
+  background-color: rgba(255, 0, 132, 0.1);
+  box-shadow: 0 0 20px rgba(255, 0, 132, 0.3) inset;
+}
+
+.drop-zone::before, .drop-zone::after {
+  content: "☠️";
+  position: absolute;
+  opacity: 0.1;
+  font-size: 2.5rem;
+}
+
+.drop-zone::before {
+  top: 10px;
+  left: 10px;
+}
+
+.drop-zone::after {
+  bottom: 10px;
+  right: 10px;
+}
+
+.drop-zone-prompt {
+  font-size: 1.3rem;
+  color: var(--hot-pink);
+  margin-bottom: 15px;
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(255, 0, 132, 0.3);
+}
+
+.drop-zone-input {
+  display: none;
+}
+
+.artwork-preview {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(255, 0, 132, 0.6);
+  border: 2px solid var(--hot-pink);
+}
+
+.artwork-item {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.artwork-item::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 0, 132, 0.2), transparent 70%);
+}
+
+.artwork-item:hover {
+  transform: scale(1.05) rotate(2deg);
+  z-index: 1;
+}
+
+.artwork-item.selected {
+  border: 2px solid var(--hot-pink);
+  box-shadow: 0 0 20px rgba(255, 0, 132, 0.6);
+}
+
+.delete-artwork-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 10;
+  background-color: var(--dark-pink);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  font-size: 12px;
+  line-height: 1;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+  transition: all 0.2s;
+}
+
+.delete-artwork-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  background-color: var(--hot-pink);
+}
+
+.track-list {
+  max-height: 400px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--hot-pink) var(--dark-gray);
+}
+
+.track-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.track-list::-webkit-scrollbar-track {
+  background: var(--dark-gray);
+}
+
+.track-list::-webkit-scrollbar-thumb {
+  background-color: var(--hot-pink);
+  border-radius: 10px;
+}
+
+.list-group-item {
+  background-color: var(--light-gray);
+  color: var(--white);
+  border-color: var(--black);
+  transition: all 0.2s;
+}
+
+.list-group-item:hover {
+  background-color: rgba(255, 0, 132, 0.2);
+}
+
+.playlist-item {
+  cursor: grab;
+  background-color: var(--light-gray);
+  border-left: 4px solid var(--hot-pink);
+}
+
+.playlist-item:active {
+  cursor: grabbing;
+}
+
+.cd-preview {
+  width: 280px;
+  height: 280px;
+  margin: 0 auto 30px auto;
+  background-color: var(--dark-gray);
+  border-radius: 50%;
+  box-shadow: 0 0 30px rgba(255, 0, 132, 0.5);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--hot-pink);
+  animation: glow 3s infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 0, 132, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 30px rgba(255, 0, 132, 0.7);
+  }
+}
+
+.cd-center {
+  position: absolute;
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--dark-gray), var(--black));
+  top: 35%;
+  left: 35%;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 0, 132, 0.3);
+}
+
+.cd-center::before {
+  content: "☠️";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2rem;
+  color: var(--hot-pink);
+}
+
+#canvas-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 2px solid var(--hot-pink);
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 0 15px rgba(255, 0, 132, 0.3) inset;
+  z-index: 10;
+}
+
+#drawing-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+}
+
+.color-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 15px;
+  justify-content: center;
+}
+
+.color-option {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid var(--dark-gray);
+  transition: all 0.2s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.color-option:hover {
+  transform: scale(1.1);
+}
+
+.color-option.selected {
+  border-color: var(--white);
+  box-shadow: 0 0 10px var(--hot-pink);
+}
+
+.tab-content {
+  padding: 20px 0;
+}
+
+input[type="text"], .form-control {
+  background-color: var(--light-gray);
+  border: 1px solid var(--hot-pink);
+  color: var(--white);
+  box-shadow: 0 0 5px rgba(255, 0, 132, 0.2) inset;
+}
+
+input[type="text"]:focus, .form-control:focus {
+  background-color: var(--light-gray);
+  border-color: var(--hot-pink);
+  box-shadow: 0 0 0 0.2rem rgba(255, 0, 132, 0.25);
+  color: var(--white);
+}
+
+::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.alert-info {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-color: var(--hot-pink);
+  color: var(--white);
+}
+
+.text-muted {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.progress {
+  background-color: var(--dark-gray);
+}
+
+.progress-bar {
+  background-color: var(--hot-pink);
+}
+
+/* Nav tabs styling */
+.nav-tabs {
+  border-bottom: 1px solid var(--hot-pink);
+}
+
+.nav-tabs .nav-link {
+  color: var(--white);
+  background-color: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-family: 'EB Garamond', serif;
+  font-size: 1.1rem;
+}
+
+.nav-tabs .nav-link:hover {
+  border-color: transparent transparent var(--hot-pink) transparent;
+  color: var(--hot-pink);
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--hot-pink);
+  background-color: transparent;
+  border-color: transparent transparent var(--hot-pink) transparent;
+  font-weight: bold;
+}
+
+/* Fun skull decorations */
+.skull-decoration {
+  position: fixed;
+  font-size: 2rem;
+  color: var(--hot-pink);
+  opacity: 0.1;
+  z-index: -1;
+  text-shadow: 0 0 5px var(--hot-pink);
+  animation: float 10s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.1;
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+    opacity: 0.2;
+  }
+}
+
+/* Dropdown styling */
+.dropdown-menu {
+  background-color: var(--dark-gray);
+  border: 1px solid var(--hot-pink);
+  box-shadow: 0 0 15px rgba(255, 0, 132, 0.3);
+}
+
+.dropdown-item {
+  color: var(--white);
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+  background-color: rgba(255, 0, 132, 0.2);
+  color: var(--white);
+}

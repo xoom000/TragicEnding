@@ -1,0 +1,42 @@
+# Python bytecode files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environment
+venv/
+env/
+ENV/
+.env
+
+# Distribution / packaging
+.Python
+dist/
+build/
+*.egg-info/
+
+# Local development
+.idea/
+.vscode/
+*.swp
+*.swo
+**/.claude/settings.local.json
+
+# Project specific
+app.log
+*.log
+downloads/
+temp/
+playlists/
+
+# Music files
+*.mp3
+*.wav
+*.ogg
+*.flac
+
+# System files
+.DS_Store
+Thumbs.db

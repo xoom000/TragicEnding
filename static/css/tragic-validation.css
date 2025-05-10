@@ -1,0 +1,157 @@
+/* Tragic Ending Form Validation Styling */
+
+/* Define additional color variables */
+:root {
+  --validation-purple: #b700ff;
+  --validation-purple-dark: #660066;
+  --validation-purple-light: rgba(183, 0, 255, 0.2);
+  --validation-bg: rgba(0, 0, 0, 0.75);
+  --validation-text: #ffffff;
+}
+
+.validation-warning {
+  /* Card-like appearance */
+  color: var(--validation-text);
+  font-family: 'EB Garamond', serif;
+  font-weight: bold;
+  padding: 12px 15px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  background-color: var(--validation-bg);
+  box-shadow: 0 0 15px rgba(255, 0, 132, 0.4),
+              0 0 30px rgba(183, 0, 255, 0.2);
+
+  /* Improved text readability */
+  text-shadow: 0 0 5px rgba(255, 0, 132, 0.7);
+  letter-spacing: 0.3px;
+  line-height: 1.4;
+
+  /* Border styling - dual colors */
+  border: 1px solid var(--hot-pink);
+  border-left: 4px solid var(--hot-pink);
+
+  /* Purple accent on the right side */
+  border-right: 4px solid var(--validation-purple);
+
+  /* Position and animation */
+  position: relative;
+  transition: all 0.4s ease;
+  animation: appearMessage 0.5s ease-in-out;
+  opacity: 1;
+}
+
+.validation-warning::before {
+  content: "✗";
+  margin-right: 10px;
+  font-size: 1.1em;
+  color: var(--hot-pink);
+}
+
+/* Add visual interest with a subtle background pattern */
+.validation-warning::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(183, 0, 255, 0.05) 0px,
+      rgba(183, 0, 255, 0.05) 2px,
+      transparent 2px,
+      transparent 4px
+    );
+  border-radius: 6px;
+  z-index: 1;
+}
+
+/* Make sure the error text stays on top */
+.validation-warning > * {
+  position: relative;
+  z-index: 2;
+}
+
+.input-error {
+  border-color: var(--hot-pink) !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 0, 132, 0.25),
+              0 0 15px rgba(183, 0, 255, 0.2) !important;
+  transition: all 0.3s ease;
+}
+
+/* Fade-in animation for new messages */
+@keyframes appearMessage {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Original glitch animation - keep for now as we'll use it selectively */
+@keyframes glitchText {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+/* Add occasional glitch animation to make validation messages more eye-catching */
+.validation-warning:hover {
+  animation: glitchText 0.5s ease-in-out;
+}
+
+/* Add a fade-out class that we'll use with JavaScript */
+.validation-warning.fade-out {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+/* Fix for containers to prevent event bubbling issues */
+.card {
+  isolation: isolate; /* Create a stacking context */
+  position: relative; /* Establish positioning context */
+}
+
+.form-group, .mb-3, .input-group {
+  isolation: isolate; /* Prevent event bubbling issues with validation */
+  position: relative; /* Ensure the validation message can be absolutely positioned */
+}
+
+/* Prevent button focus/active states from persisting */
+.btn {
+  /* Improved transition for better visual feedback */
+  transition: all 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease !important;
+}
+
+/* Reset focus and hover states */
+.btn:focus:not(:focus-visible),
+.btn:not(:hover):not(:focus):not(:active) {
+  box-shadow: none !important;
+  transform: translateY(0) !important;
+}
+
+/* Improve the appearance of buttons during interaction */
+.btn:active {
+  transform: translateY(1px) scale(0.98) !important;
+}
+
+/* Ensure proper z-index for overlapping elements */
+.card-body {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ensure form containers handle events properly */
+form {
+  position: relative;
+  z-index: 2;
+}

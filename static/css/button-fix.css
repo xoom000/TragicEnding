@@ -1,0 +1,13 @@
+/**
+ * Targeted fixes for the download button only
+ */
+
+/* Fix only the download button */
+#download-button {
+  transition: all 0.2s ease;
+}
+
+/* Simple container styling */
+.download-btn-container {
+  display: inline-block;
+}
