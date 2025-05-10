@@ -310,16 +310,52 @@
   window.selectedArtwork = null;
   window.currentColor = '#000000';
   </script>
-  <!-- Core functionality -->
+  <!-- Core functionality only -->
   <script src="/static/js/canvas-drawing.js"></script>
-  <!-- Custom form validation - load before button fix -->
   <script src="/static/js/tragic-validation.js"></script>
-  <!-- Button fix should come after validation -->
-  <script src="/static/js/button-fix.js"></script>
+
+  <!-- Aggressive button fix -->
+  <script src="/static/js/aggressive-button-fix.js"></script>
+
+  <!-- Temporarily disable other button fixes -->
+  <!-- <script src="/static/js/button-fix.js"></script> -->
+
   <!-- Enhancement scripts last -->
   <script src="/static/js/dark-melody-integration.js"></script>
+
   <!-- Validation tests (development only) -->
   <script src="/static/js/tragic-validation-test.js"></script>
+
+  <!-- Diagnostic script for button debugging -->
+  <script>
+  // Diagnostic script
+  document.addEventListener('DOMContentLoaded', function() {
+    const button = document.getElementById('download-button');
+
+    if (button) {
+      // Log all events on the button
+      ['click', 'mousedown', 'mouseup', 'focus', 'blur', 'keydown'].forEach(eventType => {
+        button.addEventListener(eventType, function(e) {
+          console.log(`Button ${eventType} event:`, {
+            type: e.type,
+            target: e.target.id,
+            activeElement: document.activeElement.id || document.activeElement.tagName
+          });
+        }, true);
+      });
+
+      // Log all clicks on the document
+      document.addEventListener('click', function(e) {
+        console.log('Document click:', {
+          target: e.target.tagName,
+          id: e.target.id,
+          classList: e.target.classList.toString(),
+          path: e.composedPath().map(el => el.tagName || 'DOCUMENT').join(' > ')
+        });
+      }, true);
+    }
+  });
+  </script>
 
   <!-- Prevent click bubbling issues -->
   <script>

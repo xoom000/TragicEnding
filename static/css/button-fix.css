@@ -1,36 +1,69 @@
-/**
- * Targeted fixes for the download button only
- */
-
-/* Prevent stuck button states */
-#download-button:focus:not(:focus-visible) {
+/* Complete override of button styles */
+.custom-button {
+  /* Remove all transitions that might cause issues */
+  transition: none !important;
+  
+  /* Override Bootstrap completely */
   outline: none !important;
   box-shadow: none !important;
+  border: none !important;
+  
+  /* Custom styling */
+  background-color: #ff0084 !important;
+  color: white !important;
+  padding: 10px 20px !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  font-weight: bold !important;
+  display: inline-block !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  position: relative !important;
+  z-index: 1 !important;
 }
 
-#download-button:not(:active) {
-  transform: translateY(0) !important;
+.custom-button:hover:not(:disabled) {
+  background-color: #d6006c !important;
 }
 
-/* Disabled state */
-#download-button:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
+.custom-button:disabled {
+  opacity: 0.7 !important;
+  cursor: not-allowed !important;
+  background-color: #ff0084 !important;
 }
 
-/* Override Bootstrap's active state */
-#download-button.btn:active,
-#download-button.btn.active {
-  transform: translateY(1px);
+/* Remove all Bootstrap button states */
+.custom-button:focus,
+.custom-button:active,
+.custom-button.active,
+.custom-button:focus-visible,
+.custom-button:focus-within {
+  outline: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+  background-color: #ff0084 !important;
 }
 
-#download-button.btn:not(:disabled):not(.disabled):active:focus,
-#download-button.btn:not(:disabled):not(.disabled).active:focus {
+/* Override any Bootstrap active states */
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+  background-color: #ff0084 !important;
+  border-color: #ff0084 !important;
   box-shadow: none !important;
 }
 
-/* Simple container styling */
-.download-btn-container {
-  display: inline-block;
+/* Ensure form doesn't have any weird behaviors */
+#download-form {
   position: relative;
+  z-index: 1;
+}
+
+/* Prevent any container from capturing clicks */
+.card-body {
+  pointer-events: none;
+}
+
+.card-body > * {
+  pointer-events: auto;
 }
