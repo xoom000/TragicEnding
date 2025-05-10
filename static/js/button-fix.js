@@ -1,53 +1,49 @@
 /**
- * Simple targeted fix for the download button only
+ * Simplified download button fix
  */
-
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('Applying targeted download button fix...');
-
-  // Get the download button by ID
-  const downloadButton = document.getElementById('download-button');
   const downloadForm = document.getElementById('download-form');
+  const downloadButton = document.getElementById('download-button');
 
-  if (downloadButton && downloadForm) {
-    console.log('Found download button, applying fix...');
-
-    // Add a flag to track if the form has been submitted
-    let isSubmitting = false;
-
-    // Simple button state management
-    downloadButton.addEventListener('click', function(e) {
-      // If already submitting, prevent multiple clicks
-      if (isSubmitting) {
+  if (downloadForm && downloadButton) {
+    // Prevent form submission via Enter key if input is empty
+    downloadForm.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !downloadForm.querySelector('input[name="song_url"]').value.trim()) {
         e.preventDefault();
-        e.stopPropagation();
-        return false;
       }
-
-      // Set submitting state
-      isSubmitting = true;
-
-      // Force blur to prevent stuck visual state
-      setTimeout(() => {
-        this.blur();
-      }, 100);
-
-      // Reset state after a delay (in case form doesn't submit)
-      setTimeout(() => {
-        isSubmitting = false;
-      }, 1000);
     });
 
-    // Visual feedback on form submission
-    downloadForm.addEventListener('submit', function() {
-      // Disable the button temporarily during submission
+    // Handle form submission
+    downloadForm.addEventListener('submit', function(e) {
+      // Don't prevent default - let the form submit normally
+      
+      // Disable button immediately
       downloadButton.disabled = true;
-
-      // Re-enable it after a delay
+      downloadButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Downloading...';
+      
+      // Force blur after a short delay
       setTimeout(() => {
-        downloadButton.disabled = false;
         downloadButton.blur();
-      }, 1000);
+      }, 100);
+    });
+
+    // Prevent mousedown state from sticking
+    downloadButton.addEventListener('mousedown', function(e) {
+      // Use mouseup on window to ensure it always fires
+      const handleMouseUp = function() {
+        downloadButton.blur();
+        window.removeEventListener('mouseup', handleMouseUp);
+      };
+      window.addEventListener('mouseup', handleMouseUp);
+    });
+
+    // Touch events for mobile
+    downloadButton.addEventListener('touchstart', function(e) {
+      const handleTouchEnd = function() {
+        downloadButton.blur();
+        window.removeEventListener('touchend', handleTouchEnd);
+      };
+      window.addEventListener('touchend', handleTouchEnd);
     });
   }
 });

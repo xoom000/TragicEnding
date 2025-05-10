@@ -11,11 +11,11 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initialize advanced UI effects
   initAnimations();
 
-  // Fix download button issue specifically
-  fixDownloadButtonIssue();
+  // DISABLED: Using button-fix.js instead
+  // fixDownloadButtonIssue();
 
-  // Fix all buttons across the app
-  fixAllButtonStickingIssues();
+  // DISABLED: Using button-fix.js instead
+  // fixAllButtonStickingIssues();
 
   // Enhance buttons
   enhanceButtons();
@@ -103,11 +103,12 @@ function initAnimations() {
 }
 
 /**
+ * DISABLED: Using button-fix.js instead
  * Fix specifically for the download button issue
  * This handles the case where the button stays clicked
  * and gets triggered when clicking elsewhere
  */
-function fixDownloadButtonIssue() {
+function fixDownloadButtonIssue() { /* DISABLED */
   // Get the download form and button
   const downloadForm = document.querySelector('form[action="/download"]');
   const downloadButton = downloadForm?.querySelector('button[type="submit"]');
@@ -175,10 +176,11 @@ function fixDownloadButtonIssue() {
 }
 
 /**
+ * DISABLED: Using button-fix.js instead
  * Fix all buttons in the application to prevent sticking issues
  * This is a comprehensive solution that works for all buttons and forms
  */
-function fixAllButtonStickingIssues() {
+function fixAllButtonStickingIssues() { /* DISABLED */
   console.log('Applying comprehensive button fixes throughout the application...');
 
   // 1. Apply fixes to all form submit buttons

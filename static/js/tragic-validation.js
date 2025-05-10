@@ -7,6 +7,9 @@
 
 class TragicValidation {
   constructor() {
+    // Store forms that are currently submitting
+    this.submittingForms = new Set();
+
     this.initializeValidation();
     this.validationStyles = {
       warningClass: 'validation-warning',
@@ -66,6 +69,13 @@ class TragicValidation {
   // Full form validation on submit
   validateForm(event) {
     const form = event.target;
+
+    // Prevent multiple submissions
+    if (this.submittingForms.has(form)) {
+      event.preventDefault();
+      return false;
+    }
+
     let isValid = true;
 
     console.log(`Validating form: ${form.action}`);
@@ -92,6 +102,14 @@ class TragicValidation {
       }
     } else {
       console.log('Form validation passed, allowing submission');
+
+      // Mark form as submitting
+      this.submittingForms.add(form);
+
+      // Reset after a delay (in case submission fails)
+      setTimeout(() => {
+        this.submittingForms.delete(form);
+      }, 5000);
     }
   }
 

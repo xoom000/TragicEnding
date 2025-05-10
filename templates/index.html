@@ -305,26 +305,44 @@
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Global variables for artwork functionality -->
+  <!-- Global variables -->
   <script>
-  // Global variables for artwork selection
   window.selectedArtwork = null;
   window.currentColor = '#000000';
-
-  // Simple download button tracking
-  document.addEventListener('DOMContentLoaded', function() {
-    console.log('Tracking download button initialized');
-  });
   </script>
-  <!-- App-wide UI enhancements -->
-  <script src="/static/js/dark-melody-integration.js"></script>
-  <!-- Direct canvas drawing JS -->
+  <!-- Core functionality -->
   <script src="/static/js/canvas-drawing.js"></script>
-  <!-- Custom form validation -->
+  <!-- Custom form validation - load before button fix -->
   <script src="/static/js/tragic-validation.js"></script>
+  <!-- Button fix should come after validation -->
+  <script src="/static/js/button-fix.js"></script>
+  <!-- Enhancement scripts last -->
+  <script src="/static/js/dark-melody-integration.js"></script>
   <!-- Validation tests (development only) -->
   <script src="/static/js/tragic-validation-test.js"></script>
-  <!-- Emergency button fix -->
-  <script src="/static/js/button-fix.js"></script>
+
+  <!-- Prevent click bubbling issues -->
+  <script>
+  // Prevent click bubbling issues
+  document.addEventListener('DOMContentLoaded', function() {
+    // Stop click events from bubbling up from forms
+    document.querySelectorAll('form').forEach(form => {
+      form.addEventListener('click', function(e) {
+        if (e.target.tagName === 'FORM' ||
+            e.target.classList.contains('card-body') ||
+            e.target.classList.contains('mb-3')) {
+          e.stopPropagation();
+        }
+      }, true);
+    });
+
+    // Global click handler to blur any focused buttons
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('button')) {
+        document.querySelectorAll('button:focus').forEach(btn => btn.blur());
+      }
+    });
+  });
+  </script>
 </body>
 </html>

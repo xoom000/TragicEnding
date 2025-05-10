@@ -2,12 +2,35 @@
  * Targeted fixes for the download button only
  */
 
-/* Fix only the download button */
-#download-button {
-  transition: all 0.2s ease;
+/* Prevent stuck button states */
+#download-button:focus:not(:focus-visible) {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+#download-button:not(:active) {
+  transform: translateY(0) !important;
+}
+
+/* Disabled state */
+#download-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Override Bootstrap's active state */
+#download-button.btn:active,
+#download-button.btn.active {
+  transform: translateY(1px);
+}
+
+#download-button.btn:not(:disabled):not(.disabled):active:focus,
+#download-button.btn:not(:disabled):not(.disabled).active:focus {
+  box-shadow: none !important;
 }
 
 /* Simple container styling */
 .download-btn-container {
   display: inline-block;
+  position: relative;
 }
